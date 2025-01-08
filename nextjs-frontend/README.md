@@ -14,7 +14,7 @@ Follow the instructions below to get the project up and running on your local ma
 
 2. **Clone the repository**: 
   ```
-  git clone https://github.com/alamarnissi/university-management.git
+  git clone https://github.com/alamarnissi/univex-university-management
   ```
 3. **Navigate to the project directory**: 
   ```
