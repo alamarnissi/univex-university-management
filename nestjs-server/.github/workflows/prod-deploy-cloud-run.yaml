@@ -1,0 +1,66 @@
+name: Build and Deploy to Cloud Run - PROD
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  GCRUN_INSTANTANCE: acalaine-auth   # cloud run instance name
+  GCRUN_ZONE: europe-west8   # cluster zone
+  IMAGE: univex-usrs-mngmnt # image name
+  IMAGE_TAG: latest # image tag
+  GAR_ZONE: europe-west8 # artifact registry zone
+  GAR_REPO: aca-users-management # artifact registry repository
+
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Setup gcloud CLI
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.SA_KEY }}'
+
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    - name: Docker configuration
+      run: |-
+        gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://$GAR_ZONE-docker.pkg.dev
+
+    # Create .env file
+    - name: Create .env file
+      run: |-
+        printf "%s" '${{ secrets.USERS_ENV_PROD }}' > .env
+
+    # Build the Docker image
+    - name: Build
+      run: |-
+        docker build \
+          --tag "$GAR_ZONE-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE:$IMAGE_TAG" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          .
+    
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |-
+        docker push "$GAR_ZONE-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE:$IMAGE_TAG"
+
+    # Deploy the Docker image to cloud run
+    - name: Deploy
+      run: |-
+        gcloud run deploy $GCRUN_INSTANTANCE \
+          --image "$GAR_ZONE-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE:$IMAGE_TAG" \
+          --platform managed \
+          --region $GCRUN_ZONE \
+          --project $PROJECT_ID

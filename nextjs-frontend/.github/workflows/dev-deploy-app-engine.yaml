@@ -1,0 +1,65 @@
+name: Build and Deploy to App Engine - DEV Environment
+
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  SERVICE_NAME: dev-app    # App Engine service name
+  REGION: europe-west6   # App Engine region (Switzerland)
+  IMAGE: univex-frontend # image name
+  IMAGE_TAG: latest # image tag
+  GAR_ZONE: europe-west1 # artifact registry zone
+  GAR_REPO: dev-aca-frontend # artifact registry repository
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Setup gcloud CLI
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.SA_KEY }}'
+
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    - name: Docker configuration
+      run: |-
+        gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://$GAR_ZONE-docker.pkg.dev
+
+    # Create .env file
+    - name: Create .env file
+      run: |-
+        printf "%s" '${{ secrets.FRONTEND_ENV_DEV }}' > .env
+
+    # Build the Docker image
+    - name: Build
+      run: |-
+        docker build \
+          --tag "$GAR_ZONE-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE:$IMAGE_TAG" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          .
+
+    # Push the Docker image to Google Artifact Registry
+    - name: Publish
+      run: |-
+        docker push "$GAR_ZONE-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE:$IMAGE_TAG"
+
+    # Deploy the Docker image to App Engine Standard Environment
+    - name: Deploy
+      run: |-
+        gcloud app deploy dev-app.yaml \
+          --image-url "$GAR_ZONE-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE:$IMAGE_TAG" \
+          --project $PROJECT_ID \
+          --version $GITHUB_SHA \
+          --quiet

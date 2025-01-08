@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: univex-frontend-service
+spec:
+  selector:
+    app: univex-frontend   # the name of target POD from deployment.yaml
+  ports:
+  - port: 80  # Expose on port 80
+    targetPort: 3000  # Forward to container port 3000
+  type: LoadBalancer  # Create a Load Balancer for external access

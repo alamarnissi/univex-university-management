@@ -1,0 +1,148 @@
+{
+    "LandingPage": {
+        "title": "Univex | Smart Education",
+        "heroSection": {
+            "heading": "حقق التميز في مجال  \n التعليم مع",
+            "desc": "Univex هو الحل الأمثل للشركات ومسؤولي مراكز التدريب الذين يرغبون في أتمتة إدارة المحتوى التعليمي ومراقبته وإعداد التقارير عنه وتوزيعه بسهولة. مع LMS (نظام إدارة التعلم) وميزات الذكاء الاصطناعي ، يمكنك إنشاء المحتوى بسرعة وقياس التأثير والحصول على توصيات مخصصة للمتعلمين وغير ذلك الكثير!",
+            "btnStart": "ابدأ الآن مجانًا",
+            "btnDemo": "شاهد العرض التوضيحي"
+        },
+        "HelpSection": {
+            "heading": "كيف ستساعدك Univex",
+            "firstCard": {
+                "heading": "تحسين كفاءة تقديم البرامج التدريبية الخاصة بك",
+                "list": {
+                    "first": "تقليل الوقت والجهد اللازمين لإنشاء وإدارة المحتوى التعليمي",
+                    "second": "تحسين مشاركة المتعلم والخبرة"
+                }
+            },
+            "secondCard": {
+                "heading": "روّج لمحتوى التعلم الخاص بك وابدأ إستراتيجيتك التسويقية بسهولة",
+                "list": {
+                    "first": "يمكّنك Univex بالأدوات اللازمة لإنشاء موقع الويب الخاص بك بسهولة",
+                    "second": "أدوات تسويق متكاملة"
+                }
+            },
+            "thirdCard": {
+                "heading": "مساعدة الذكاء الاصطناعي والرؤى المدفوعة بالبيانات",
+                "list": {
+                    "first": "احصل على رؤى في الوقت الفعلي لبيانات التعلم الخاصة بك من خلال أداة تحليلات LMS الخاصة بنا",
+                    "second": "الأدوات التي تدعم الذكاء الاصطناعي: احصل على توصيات مخصصة وادعم روبوتات المحادثة لمساعدتك"
+                }
+            },
+            "fourthCard": {
+                "heading": "أتمتة إدارة الدفع والفواتير",
+                "list": {
+                    "first": "جمع المدفوعات بسهولة",
+                    "second": "أدوات مدمجة لإدارة فواتيرك"
+                }
+            }
+        },
+        "PlatformSection": {
+            "desc": "يجعل تدريب الأعمال أكثر كفاءة مع توفير تجربة أفضل للمتعلم!",
+            "list" : {
+                "first": "إنشاء المحتوى بسهولة",
+                "second": "إنشاء موقع الويب الخاص بك ونشر المحتوى",
+                "third": "ابدأ حملتك التسويقية",
+                "fourth": "استخدم التحليلات لاتخاذ قرارات عمل أكثر حكمة"
+            }
+        },
+        "FeaturesSection": {
+            "firstFeature": {
+                "heading": "فصول إفتراضية",
+                "desc": "يعرف التعلم الافتراضي على أنه كمبيوتر أو نظام أساسي"
+            },
+            "secondFeature": {
+                "heading": "تعلم جماعي",
+                "desc": "مكان للتواصل الاجتماعي عبر الكمبيوتر أو الهاتف المحمول"
+            },
+            "thirdFeature": {
+                "heading": "مسارات التعلم المخصصة", 
+                "desc": "مكان للتواصل الاجتماعي عبر الكمبيوتر أو الهاتف المحمول"
+            },
+            "fourthFeature": {
+                "heading": "روبوت للدعم",
+                "desc": "مكان للتواصل الاجتماعي عبر الكمبيوتر أو الهاتف المحمول"
+            }
+        },
+        "PricingSection": {
+            "heading": "Our Pricing Plans",
+            "desc": "Build a successful business with a complete suite of tools to help you sell more.",
+            "firstPlan": {
+                "cost": "DT 19.99/mo",
+                "features": {
+                    "first": "5 Users",
+                    "second": "All UI Components",
+                    "third": "Lifetime access",
+                    "fourth": "Free Updates",
+                    "fifth": "Use on 1(one) project",
+                    "sixth": "4 months support"
+                }
+            },
+            "secondPlan": {
+                "cost": "DT 30.99/mo",
+                "features": {
+                    "first": "5 Users",
+                    "second": "All UI Components",
+                    "third": "Lifetime access",
+                    "fourth": "Free Updates",
+                    "fifth": "Use on 1(one) project",
+                    "sixth": "4 months support"
+                }
+            },
+            "thirdPlan": {
+                "cost": "DT 70.99/mo",
+                "features": {
+                    "first": "5 Users",
+                    "second": "All UI Components",
+                    "third": "Lifetime access",
+                    "fourth": "Free Updates",
+                    "fifth": "Use on 1(one) project",
+                    "sixth": "4 months support"
+                }
+            },
+            "purchase": "شراء الآن"
+        },
+        "ContactSection": {
+            "contactUs": "تواصل معنا",
+            "hearFromYou": "يسعدنا تلقي خبر من عندك.",
+            "howHelp": "كيف يمكننا المساعدة",
+            "form": {
+                "heading": "تواصل معنا",
+                "submit": "أرسل",
+                "labels": {
+                    "fullName": "الإسم الكامل",
+                    "email": "العنولن الإلكتروني",
+                    "phone": "الهاتف",
+                    "message": "محتوى الرسالة"
+                },
+                "placeholders": {
+                    "fullName": "أدخل إسمك الكامل",
+                    "message": "أدخل رسالتك هنا"
+                }
+            }
+        },
+        "links": {
+            "main": {
+                "home": "الرئيسية",
+                "features": "خصائص",
+                "pricing": "التسعير",
+                "faqs": "أسئلة مكررة",
+                "contactUs": "تواصل معنا"
+            },
+            "login": "الدخول",
+            "register": "التسجيل"
+        }
+    },
+    "LocaleLayout": {
+        "title": "Univex | Welcome"
+    },
+    "LocaleSwitcher": {
+        "label": "Change language",
+        "locale": "{locale, select, en {en} fr {fr} ar {ar} other {}}"
+    },
+    "NotFoundPage": {
+        "title": "Page not found",
+        "description": "Please double-check the browser address bar or use the navigation to go to a known page."
+    }
+}

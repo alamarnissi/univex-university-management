@@ -1,0 +1,148 @@
+{
+    "LandingPage": {
+        "title": "Univex | Smart Management",
+        "heroSection": {
+            "heading": "Gestionnaire de l'enseignement universitaire",
+            "desc": "Univex est votre solution de gestion universitaire",
+            "btnStart": "Commencez Gratuitement",
+            "btnDemo": "Regardez un Demo"
+        },
+        "HelpSection": {
+            "heading": "How Univex helps?",
+            "firstCard": {
+                "heading": "Improve the effciency of delivering your training programs",
+                "list": {
+                    "first": "Reduce the time and effort needed the create and manage learning content",
+                    "second": "Improve learner engagement and experience"
+                }
+            },
+            "secondCard": {
+                "heading": "Promote your Learning content and easily launch your marketing strategy",
+                "list": {
+                    "first": "Univex empowers you with the needed tools to easily create your website",
+                    "second": "Integrated marketing tools"
+                }
+            },
+            "thirdCard": {
+                "heading": "AI assistance and data driven insights",
+                "list": {
+                    "first": "Get real-time insights into your learning data with our LMS analytics tool",
+                    "second": "AI-enabled tools: Get personalized recommendations and support chatbots to help you"
+                }
+            },
+            "fourthCard": {
+                "heading": "Automate payment and invoices management",
+                "list": {
+                    "first": "Easily collect payments",
+                    "second": "Built-in tools to manage your invoices"
+                }
+            }
+        },
+        "PlatformSection": {
+            "desc": "makes training businesses more efficient while providing a better learner experience !",
+            "list" : {
+                "first": "Easily create content",
+                "second": "Create your website and publish content",
+                "third": "Launch your marketing campaign",
+                "fourth": "Use analytics to make wiser business decisions"
+            }
+        },
+        "FeaturesSection": {
+            "firstFeature": {
+                "heading": "Virtual Classroom",
+                "desc": "Virtual learning know as a computer or platform"
+            },
+            "secondFeature": {
+                "heading": "Group Learning",
+                "desc": "A Place for Socialising via Computer or Mobile"
+            },
+            "thirdFeature": {
+                "heading": "Personalized Learning Paths", 
+                "desc": "A Place for Socialising via Computer or Mobile"
+            },
+            "fourthFeature": {
+                "heading": "Chatbots enabled support",
+                "desc": "A Place for Socialising via Computer or Mobile"
+            }
+        },
+        "PricingSection": {
+            "heading": "Our Pricing Plans",
+            "desc": "Build a successful business with a complete suite of tools to help you sell more.",
+            "firstPlan": {
+                "cost": "DT 19.99/mo",
+                "features": {
+                    "first": "5 Users",
+                    "second": "All UI Components",
+                    "third": "Lifetime access",
+                    "fourth": "Free Updates",
+                    "fifth": "Use on 1(one) project",
+                    "sixth": "4 months support"
+                }
+            },
+            "secondPlan": {
+                "cost": "DT 30.99/mo",
+                "features": {
+                    "first": "5 Users",
+                    "second": "All UI Components",
+                    "third": "Lifetime access",
+                    "fourth": "Free Updates",
+                    "fifth": "Use on 1(one) project",
+                    "sixth": "4 months support"
+                }
+            },
+            "thirdPlan": {
+                "cost": "DT 70.99/mo",
+                "features": {
+                    "first": "5 Users",
+                    "second": "All UI Components",
+                    "third": "Lifetime access",
+                    "fourth": "Free Updates",
+                    "fifth": "Use on 1(one) project",
+                    "sixth": "4 months support"
+                }
+            },
+            "purchase": "Acheter"
+        },
+        "ContactSection": {
+            "contactUs": "Contact Us",
+            "hearFromYou": "We would Love to Hear From You.",
+            "howHelp": "How Can We Help?",
+            "form": {
+                "heading": "Send us a Message",
+                "submit": "Envoyer",
+                "labels": {
+                    "fullName": "Full Name",
+                    "email": "Email address",
+                    "phone": "Phone",
+                    "message": "Message"
+                },
+                "placeholders": {
+                    "fullName": "Full Name",
+                    "message": "Type your message here"
+                }
+            }
+        },
+        "links": {
+            "main": {
+                "home": "Accueil",
+                "features": "Features",
+                "pricing": "Pricing",
+                "faqs": "FAQs",
+                "contactUs": "Contactez-nous"
+            },
+            "login": "Login",
+            "register": "Sign Up"
+        }
+    },
+    "LocaleLayout": {
+        "title": "Univex | Welcome"
+    },
+    "LocaleSwitcher": {
+        "label": "Change language",
+        "locale": "{locale, select, en {en} fr {fr} ar {ar} other {}}"
+    },
+    "NotFoundPage": {
+        "title": "Page not found",
+        "description": "Please double-check the browser address bar or use the navigation to go to a known page."
+    }
+}

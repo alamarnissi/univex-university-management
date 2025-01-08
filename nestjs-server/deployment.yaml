@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: univex-auth-deployment  # Replace with your deployment name
+  labels:
+    app: univex-auth  
+spec:
+  replicas: 2  
+  selector:
+    matchLabels:
+      app: univex-auth  # must be same as "app: name" under the template specification
+  template:
+    metadata:
+      labels:
+        app: univex-auth 
+    spec:
+      containers:
+      - name: univex-auth
+        image: europe-west8-docker.pkg.dev/univex/aca-auth-europe-west8/univex-auth:latest  # Replace with your image path
+        ports:
+        - containerPort: 5050

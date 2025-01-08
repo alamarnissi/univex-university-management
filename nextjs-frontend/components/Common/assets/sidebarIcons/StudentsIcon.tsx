@@ -1,0 +1,14 @@
+
+
+export const StudentsIcon = (props: any) => {
+    return (
+        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+            <path d="M14.8415 5.13514C14.7908 5.12712 14.7315 5.12712 14.6808 5.13514C13.5129 5.09507 12.582 4.1895 12.582 3.06757C12.582 1.92159 13.5552 1 14.7654 1C15.9755 1 16.9487 1.92961 16.9487 3.06757C16.9403 4.1895 16.0094 5.09507 14.8415 5.13514Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M13.9717 10.9692C15.1311 11.1535 16.4089 10.9612 17.3059 10.3922C18.4992 9.63892 18.4992 8.40479 17.3059 7.65149C16.4004 7.08251 15.1057 6.89017 13.9463 7.0825" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M4.66188 5.13514C4.71265 5.12712 4.77189 5.12712 4.82266 5.13514C5.9905 5.09507 6.92139 4.1895 6.92139 3.06757C6.92139 1.92159 5.94819 1 4.73804 1C3.52789 1 2.55469 1.92961 2.55469 3.06757C2.56315 4.1895 3.49404 5.09507 4.66188 5.13514Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M5.53289 10.9692C4.37352 11.1535 3.09567 10.9612 2.19863 10.3922C1.0054 9.63892 1.0054 8.40479 2.19863 7.65149C3.10413 7.08251 4.3989 6.89017 5.55828 7.0825" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M9.76635 11.1215C9.71557 11.1135 9.65634 11.1135 9.60556 11.1215C8.43772 11.0814 7.50684 10.1758 7.50684 9.0539C7.50684 7.90792 8.48003 6.98633 9.69018 6.98633C10.9003 6.98633 11.8735 7.91593 11.8735 9.0539C11.8651 10.1758 10.9342 11.0894 9.76635 11.1215Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M7.30312 13.6459C6.1099 14.3992 6.1099 15.6333 7.30312 16.3866C8.65714 17.2441 10.8743 17.2441 12.2284 16.3866C13.4216 15.6333 13.4216 14.3992 12.2284 13.6459C10.8828 12.7964 8.65714 12.7964 7.30312 13.6459Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    )
+}

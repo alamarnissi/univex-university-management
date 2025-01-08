@@ -1,0 +1,396 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum InstitutionType {
+  Training_center
+  Corporate
+  Educational_institution
+  Solo_educator
+}
+
+type InstructorWorkspace {
+  workspace_id String
+  courses      String[] @default([])
+  tracks       String[] @default([])
+  groups       String[] @default([])
+  active       Boolean  @default(true)
+}
+
+type StudentWorkspace {
+  workspace_id       String
+  registered_courses String[] @default([])
+  engagement_info    EngagementInfo?
+  feedback           Feedback[]
+  technical_info     TechnicalInfo?
+  performance_info   PerformanceInfo?
+  active             Boolean          @default(true)
+  added_at           DateTime?        @default(now())
+}
+
+model Workspaces {
+  workspace_id         String   @id @default(uuid()) @map("_id")
+  subdomain            String?  @unique
+  custom_domain        String?  @unique
+  manager_id           String   @unique
+  schema_version       String   @default("V1")
+  name                 String   @unique
+  courses              String[]   // slugs
+  tracks               String[]
+  groups               String[]
+  active_instructors   String[]   // emails
+  inactive_instructors String[]   
+  active_students      String[]   // emails
+  inactive_students    String[]
+  total_sales          Float?     @default(0)
+  last_month_sales     Float?     @default(0)
+  current_month_sales  Float?     @default(0)
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  @@map("Workspaces")
+}
+
+model Managers {
+  manager_id               String          @id @default(uuid()) @map("_id")
+  workspace_id             String?         @unique
+  schema_version           String          @default("V1")
+  first_name               String
+  last_name                String
+  email                    String          @unique
+  password                 String?
+  phone_number             String
+  institution_type         InstitutionType
+  learning_business_name   String          @unique
+  phone_number_verified    Boolean         @default(false)
+  email_verified           Boolean         @default(false)
+  created_at               DateTime        @default(now())
+  updated_at               DateTime        @updatedAt
+  login_attempts           Int             @default(0)
+  last_login               DateTime?
+  last_password_reset      DateTime?
+  email_verification_token String?
+  forget_password_token    String?
+
+  @@map("Managers")
+}
+
+model Instructors {
+  instructor_id         String                @id @default(uuid()) @map("_id")
+  workspaces            InstructorWorkspace[]
+  schema_version        String                @default("V1")
+  instructor_name       String
+  email                 String                @unique
+  password              String
+  phone_number          String?
+  profession            String                @default("instructor")
+  bio                   String?
+  linkedin_profile      String?
+  created_at            DateTime              @default(now())
+  updated_at            DateTime              @updatedAt
+  login_attempts        Int                   @default(0)
+  last_login            DateTime?
+  last_password_reset   DateTime?
+  forget_password_token String?
+
+  @@map("Instructors")
+}
+
+model Students {
+  student_id            String             @id @default(uuid()) @map("_id")
+  schema_version        String             @default("V1")
+  student_name          String
+  email                 String             @unique
+  password              String
+  phone_number          String?
+  date_of_birth         DateTime?
+  gender                String?
+  workspaces            StudentWorkspace[]
+  created_at            DateTime           @default(now())
+  updated_at            DateTime           @updatedAt
+  login_attempts        Int                @default(0)
+  last_login            DateTime?
+  last_password_reset   DateTime?
+  forget_password_token String?
+
+  @@map("Students")
+}
+
+model Courses {
+  course_id                  String             @id @default(uuid()) @map("_id")
+  workspace_id               String?
+  schema_version             String             @default("V1")
+  course_name                String
+  slug                       String?            @unique
+  course_description         String
+  course_level               String
+  course_type                String // self-paced / cohort-based
+  course_duration            Int
+  course_access              String // Free / Paid 
+  curriculum_type            CurriculumType?
+  price                      Float?
+  preferred_currency         CourseCurrency?
+  promotional_image          String?
+  promotional_image_filename String?
+  promotional_video          String?
+  created_at                 DateTime           @default(now())
+  updated_at                 DateTime           @updatedAt
+  deleted_at                 DateTime?
+  course_status              String             @default("draft") // draft - published - in-review
+  assigned_instructors       InstructorCourse[]
+  rating                     CourseRating[]
+  number_of_ratings          Int?               @default(0)
+  overall_rating             Float?             @default(0)
+  modules                    Modules[]
+  total_modules_number       Int?               @default(0)
+  total_sales                Float?               @default(0)
+  last_month_sales           Float?               @default(0)
+  current_month_sales        Float?               @default(0)
+  students                   StudentCourse[]
+  number_of_students         Int?               @default(0)
+  schedules                  CourseSession[]
+
+  @@map("Courses")
+}
+
+model Contact {
+  contact_id     String   @id @default(uuid()) @map("_id")
+  schema_version String   @default("V1")
+  full_name      String
+  email          String   @unique
+  phone_number   String?
+  message        String
+  send_at        DateTime @default(now())
+
+  @@map("Contacts")
+}
+
+enum InstructorRole {
+  Editor
+  Presenter
+}
+
+type InstructorCourse {
+  instructor_id   String
+  instructor_name String
+  profession      String?
+  role            InstructorRole
+}
+
+type StudentCourse {
+  student_id   String
+  student_name String
+  email        String
+  amount_paid  Float?
+  last_login   DateTime?
+  added_at     DateTime?  @default(now())
+}
+
+model Modules {
+  module_id   String @id @default(uuid()) @map("_id")
+  module_name String
+  order       Int
+
+  courseId String
+  course   Courses @relation(fields: [courseId], references: [course_id], onDelete: Cascade)
+
+  lessons Lessons[]
+
+  @@map("Modules")
+}
+
+model Lessons {
+  lesson_id     String     @id @default(uuid()) @map("_id")
+  lesson_name   String?
+  lesson_status String     @default("draft")
+  lesson_type   LessonType
+  order         Int
+  file_url      String?
+  content       String? // for TextEditor lesson
+  isFree        Boolean    @default(false)
+  xpPoints      Int        @default(10)
+
+  moduleId String
+  module   Modules @relation(fields: [moduleId], references: [module_id], onDelete: Cascade)
+
+  lesson_activity LessonActivity?
+  project         Projects?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Lessons")
+}
+
+model LessonActivity {
+  activity_id   String       @id @default(uuid()) @map("_id")
+  activity_type ActivityType
+
+  // Add activity-specific fields here
+  lesson          Lessons          @relation(fields: [lessonId], references: [lesson_id])
+  lessonId        String           @unique
+  MultiChoiceQuiz MultiChoiceQuiz?
+  TrueFalseQuiz   TrueFalseQuiz?
+}
+
+model Projects {
+  project_id      String    @id @default(uuid()) @map("_id")
+  project_name    String
+  description     String
+  keywords        String[]
+  skills          String[]
+  instructions    String
+  complete_option String
+  attachements    String[]  @default([])
+  deadline        DateTime?
+
+  // Add project-specific fields here
+  lesson   Lessons @relation(fields: [lessonId], references: [lesson_id])
+  lessonId String  @unique
+}
+
+model MultiChoiceQuiz {
+  quiz_id        String          @id @default(uuid()) @map("_id")
+  quiz_questions QuizQuestions[]
+  nbr_questions  Int
+  difficulty     Int
+  grading_option String
+  activity       LessonActivity  @relation(fields: [activityId], references: [activity_id])
+  activityId     String          @unique
+}
+
+model TrueFalseQuiz {
+  quiz_id        String    @id @default(uuid()) @map("_id")
+  quiz_questions Answers[] // True or False questions must be of Text / isCorrect 
+
+  nbr_questions  Int
+  difficulty     Int
+  grading_option String
+  activity       LessonActivity @relation(fields: [activityId], references: [activity_id])
+  activityId     String         @unique
+}
+
+enum ActivityType {
+  MULTI_CHOICE
+  TRUE_FALSE
+  FILL_IN_THE_BLANKS
+  FLASHCARDS
+  DRAG_AND_DROP
+  IMG_BASED
+  ESSAY
+  PROGRAMMING_QTS
+}
+
+type QuizQuestions {
+  question_id   String
+  question_text String
+  answers       Answers[]
+}
+
+type Answers {
+  answer_id   String
+  answer_text String
+  is_correct  Boolean
+}
+
+
+type TestScore {
+  test_id String
+  score   Float
+}
+
+type CompletedActivity {
+  activity_id     String
+  completion_date DateTime
+}
+
+type Comment {
+  comment_id   String
+  comment_text String
+  comment_date DateTime
+}
+
+type VideoPause {
+  video_id          String
+  pauses            Int
+  total_time_paused Float
+}
+
+type BrowserActivity {
+  video_id             String
+  other_windows_opened Boolean
+}
+
+type Feedback {
+  course_id     String
+  rating        Float
+  feedback_text String
+  feedback_date DateTime
+}
+
+type Course {
+  course_id       String
+  progress        Float       @default(0)
+  completion_date DateTime?
+  grade           Float?
+  test_scores     TestScore[]
+}
+
+type EngagementInfo {
+  time_spent_on_platform Float               @default(0)
+  completed_activities   CompletedActivity[]
+  comments               Comment[]
+}
+
+type TechnicalInfo {
+  device            String
+  internet_speed    Float  @default(0)
+  screen_resolution String
+}
+
+type PerformanceInfo {
+  overall_grade      Float?
+  completion_rate    Float             @default(0)
+  video_pauses       VideoPause[]
+  browser_activities BrowserActivity[]
+}
+
+enum CourseCurrency {
+  USD
+  EURO
+  TND
+}
+
+enum LessonType {
+  Video
+  Activity
+  Text
+  Project
+  Doc_Presentation
+}
+
+enum CurriculumType {
+  Manual
+  AI_Generated
+}
+
+type CourseRating {
+  student_id String
+  rating     Int
+}
+
+type CourseSession {
+  session_id      String
+  start_date      DateTime
+  end_date        DateTime
+  course_capacity Int
+  max_group_size  Int
+}

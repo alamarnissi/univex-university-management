@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: univex-frontend-deployment
+  labels:
+    app: univex-frontend
+spec:
+  replicas: 2  
+  selector:
+    matchLabels:
+      app: univex-frontend  # must be same as "app: name" under the template specification
+  template:
+    metadata:
+      labels:
+        app: univex-frontend 
+    spec:
+      containers:
+      - name: univex-frontend
+        image: europe-west8-docker.pkg.dev/univex/univex-frontend-europe-west8/univex-frontend:latest  # Replace with your image path
+        ports:
+        - containerPort: 3000
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: NEXTAUTH_URL
+          value: "http://34.141.49.188"
+        - name: NEXT_PUBLIC_NEXTAUTH_URL
+          value: "http://34.141.49.188"
+        - name: NEXT_PUBLIC_APP_URL
+          value: "http://34.141.49.188"
+        resources:
+          limits:
+            cpu: "1"  # Limit the CPU to 1 core
+            memory: "512Mi"  # Limit the memory to 512 megabytes
+          requests:
+            cpu: "0.5"  # Request 0.5 cores of CPU
+            memory: "256Mi"  # Request 256 megabytes of memory
